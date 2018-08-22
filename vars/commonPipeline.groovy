@@ -22,7 +22,7 @@ def call(Map pipelineParams) {
 
                     stash includes: '**', name: 'RelToSTAN'
                 }
-            },
+            }
             stage('Static Analysis') {
                 timestamps {
                     prepareWorkspace(stashName: 'RelToSTAN')
@@ -32,7 +32,7 @@ def call(Map pipelineParams) {
 
                     stash includes: '**', name: 'RelToCPD'
                 }
-            },
+            }
             stage('Copy Paste Detector') {
                 timestamps {
                     prepareWorkspace(stashName: 'RelToCPD')
@@ -42,7 +42,7 @@ def call(Map pipelineParams) {
 
                     stash includes: '**', name: 'RelToCS'
                 }
-            },
+            }
             stage('Code Sniffer') {
                 timestamps {
                     prepareWorkspace(stashName: 'RelToCS')
@@ -52,7 +52,7 @@ def call(Map pipelineParams) {
 
                     stash includes: '**', name: 'RelToDocument'
                 }
-            },
+            }
             stage('Documentation') {
                 timestamps {
                     prepareWorkspace(stashName: 'RelToDocument')
@@ -62,7 +62,7 @@ def call(Map pipelineParams) {
 
                     stash includes: '**', name: 'RelToPackage'
                 }
-            },
+            }
             stage('Package') {
                 timestamps {
                     prepareWorkspace(stashName: 'RelToPackage')
@@ -72,7 +72,7 @@ def call(Map pipelineParams) {
 
                     stash includes: '**', name: 'RelToArchive'
                 }
-            },
+            }
             stage('Archive') {
                 timestamps {
                     prepareWorkspace(stashName: 'RelToArchive')
@@ -82,7 +82,7 @@ def call(Map pipelineParams) {
 
                     stash includes: '**', name: 'RelToTag'
                 }
-            },
+            }
             stage('Tagging') {
                 timestamps {
                     prepareWorkspace(stashName: 'RelToTag')
