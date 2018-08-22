@@ -10,84 +10,100 @@ def call(Map pipelineParams) {
     def buildKey = 'Build';
 
     pipeline {
-        agent LINUX
+        agent any
         stages {
             stage('Build') {
-                timestamps {
-                    checkout scm
+                steps {
+                    timestamps {
+                        checkout scm
 
-                    bbNotify( key: buildKey, name: BuildName) {
-                        runBuild()
+                        bbNotify( key: buildKey, name: BuildName) {
+                            runBuild()
+                        }
+
+                        stash includes: '**', name: 'RelToSTAN'
                     }
-
-                    stash includes: '**', name: 'RelToSTAN'
                 }
             }
             stage('Static Analysis') {
-                timestamps {
-                    prepareWorkspace(stashName: 'RelToSTAN')
-                    bbNotify( key: buildKey, name: BuildName) {
-                        runPHPStan()
-                    }
+                steps {
+                    timestamps {
+                        prepareWorkspace(stashName: 'RelToSTAN')
+                        bbNotify( key: buildKey, name: BuildName) {
+                            runPHPStan()
+                        }
 
-                    stash includes: '**', name: 'RelToCPD'
+                        stash includes: '**', name: 'RelToCPD'
+                    }
                 }
             }
             stage('Copy Paste Detector') {
-                timestamps {
-                    prepareWorkspace(stashName: 'RelToCPD')
-                    bbNotify( key: buildKey, name: BuildName) {
-                        runPHPCpd()
-                    }
+                steps {
+                    timestamps {
+                        prepareWorkspace(stashName: 'RelToCPD')
+                        bbNotify( key: buildKey, name: BuildName) {
+                            runPHPCpd()
+                        }
 
-                    stash includes: '**', name: 'RelToCS'
+                        stash includes: '**', name: 'RelToCS'
+                    }
                 }
             }
             stage('Code Sniffer') {
-                timestamps {
-                    prepareWorkspace(stashName: 'RelToCS')
-                    bbNotify( key: buildKey, name: BuildName) {
-                        runPHPCs()
-                    }
+                steps {
+                    timestamps {
+                        prepareWorkspace(stashName: 'RelToCS')
+                        bbNotify( key: buildKey, name: BuildName) {
+                            runPHPCs()
+                        }
 
-                    stash includes: '**', name: 'RelToDocument'
+                        stash includes: '**', name: 'RelToDocument'
+                    }
                 }
             }
             stage('Documentation') {
-                timestamps {
-                    prepareWorkspace(stashName: 'RelToDocument')
-                    bbNotify( key: buildKey, name: BuildName) {
-                        runDocument()
-                    }
+                steps {
+                    timestamps {
+                        prepareWorkspace(stashName: 'RelToDocument')
+                        bbNotify( key: buildKey, name: BuildName) {
+                            runDocument()
+                        }
 
-                    stash includes: '**', name: 'RelToPackage'
+                        stash includes: '**', name: 'RelToPackage'
+                    }
                 }
             }
             stage('Package') {
-                timestamps {
-                    prepareWorkspace(stashName: 'RelToPackage')
-                    bbNotify( key: buildKey, name: BuildName) {
-                        runPackage()
-                    }
+                steps {
+                    timestamps {
+                        prepareWorkspace(stashName: 'RelToPackage')
+                        bbNotify( key: buildKey, name: BuildName) {
+                            runPackage()
+                        }
 
-                    stash includes: '**', name: 'RelToArchive'
+                        stash includes: '**', name: 'RelToArchive'
+                    }
                 }
             }
             stage('Archive') {
-                timestamps {
-                    prepareWorkspace(stashName: 'RelToArchive')
-                    bbNotify( key: buildKey, name: BuildName) {
-                        runArchive(baseName: ArtifactBaseName)
-                    }
+                steps {
+                    timestamps {
+                        prepareWorkspace(stashName: 'RelToArchive')
+                        bbNotify( key: buildKey, name: BuildName) {
+                            runArchive(baseName: ArtifactBaseName)
+                        }
 
-                    stash includes: '**', name: 'RelToTag'
+                        stash includes: '**', name: 'RelToTag'
+                    }
                 }
             }
             stage('Tagging') {
-                timestamps {
-                    prepareWorkspace(stashName: 'RelToTag')
-                    bbNotify( key: buildKey, name: BuildName) {
-                        runTagging(buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
+                steps {
+                    timestamps {
+                        prepareWorkspace(stashName: 'RelToTag')
+                        bbNotify( key: buildKey, name: BuildName) {
+                            runTagging(buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
+                        }
                     }
                 }
             }
