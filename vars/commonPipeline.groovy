@@ -1,6 +1,10 @@
 #!/usr/bin/env groovy
 
 def call(Map pipelineParams) {
+    properties ([[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '7', numToKeepStr: '']]])
+    /** Some hard coded defaults for common build variables. These should all be replaced by the actual build scripts **/
+    def defaults = [GITDESCRIBE: 'Developer Version', GIT_BRANCH: 'Developer Build', PRODUCT_VERSION: '0.0.1', GIT_REVISION_COUNT: 1, BRANCH_NAME: env.BRANCH_NAME, BUILD_NUMBER: env.BUILD_NUMBER]
+
     def ArtifactBaseName = pipelineParams.system
     def BuildName = env.BRANCH_NAME + ' ' + env.BUILD_DISPLAY_NAME + '(Build)';
     def buildKey = 'Build';
