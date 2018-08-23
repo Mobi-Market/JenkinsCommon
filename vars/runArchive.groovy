@@ -3,7 +3,8 @@
 def call(Map config) {
 	def ArtifactBaseName = config?.baseName
 
-	def script = libraryResource 'archive.sh'
+	def scriptContent = libraryResource 'archive.sh'
+	writeFile file: "archive.sh", text: scriptContent
 
 	def props = readProperties defaults: defaults, file: 'git.properties'
 	echo props.toString()
@@ -11,7 +12,7 @@ def call(Map config) {
 	echo e.toString()
 	
 	withEnv(e) {
-		sh script
+		sh 'archive.sh'
 		zip dir: 'Artifacts', glob: '', zipFile: 'Artifacts/'+ArtifactBaseName+'-'+env.GITDESCRIBE+'.zip'
 	}
 

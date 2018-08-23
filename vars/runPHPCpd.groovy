@@ -1,7 +1,8 @@
 #!/usr/bin/env groovy
 
 def call(Map config) {
-	def script = libraryResource 'phpcpd.sh'
+	def scriptContent = libraryResource 'phpcpd.sh'
+	writeFile file: "phpcpd.sh", text: scriptContent
 
-	sh script
+	sh 'phpcpd.sh'
 }

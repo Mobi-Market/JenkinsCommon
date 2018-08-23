@@ -1,7 +1,8 @@
 #!/usr/bin/env groovy
 
 def call(Map config) {
-	def script = libraryResource 'phpstan.sh'
+	def scriptContent = libraryResource 'phpstan.sh'
+	writeFile file: "phpstan.sh", text: scriptContent
 
-	sh script
+	sh 'phpstan.sh'
 }

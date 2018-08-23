@@ -1,7 +1,8 @@
 #!/usr/bin/env groovy
 
 def call(Map config) {
-	def script = libraryResource 'document.sh'
+	def scriptContent = libraryResource 'document.sh'
+	writeFile file: "document.sh", text: scriptContent
 
-	sh script
+	sh 'document.sh'
 }
