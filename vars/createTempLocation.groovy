@@ -2,5 +2,5 @@
 
 def call(String path) {
   String tmpDir = pwd tmp: true
-  return tmpDir + File.separator + path
+  return WORKSPACE + '/scripts/' + path
 }
