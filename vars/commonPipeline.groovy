@@ -28,7 +28,7 @@ def call(Map pipelineParams) {
             stage('Static Analysis') {
                 steps {
                     timestamps {
-                        prepareWorkspace(stashName: 'RelToSTAN')
+                        prepareWorkSpace(stashName: 'RelToSTAN')
                         bbNotify( key: buildKey, name: BuildName) {
                             runPHPStan()
                         }
@@ -40,7 +40,7 @@ def call(Map pipelineParams) {
             stage('Copy Paste Detector') {
                 steps {
                     timestamps {
-                        prepareWorkspace(stashName: 'RelToCPD')
+                        prepareWorkSpace(stashName: 'RelToCPD')
                         bbNotify( key: buildKey, name: BuildName) {
                             runPHPCpd()
                         }
@@ -52,7 +52,7 @@ def call(Map pipelineParams) {
             stage('Code Sniffer') {
                 steps {
                     timestamps {
-                        prepareWorkspace(stashName: 'RelToCS')
+                        prepareWorkSpace(stashName: 'RelToCS')
                         bbNotify( key: buildKey, name: BuildName) {
                             runPHPCs()
                         }
@@ -64,7 +64,7 @@ def call(Map pipelineParams) {
             stage('Documentation') {
                 steps {
                     timestamps {
-                        prepareWorkspace(stashName: 'RelToDocument')
+                        prepareWorkSpace(stashName: 'RelToDocument')
                         bbNotify( key: buildKey, name: BuildName) {
                             runDocument()
                         }
@@ -76,7 +76,7 @@ def call(Map pipelineParams) {
             stage('Package') {
                 steps {
                     timestamps {
-                        prepareWorkspace(stashName: 'RelToPackage')
+                        prepareWorkSpace(stashName: 'RelToPackage')
                         bbNotify( key: buildKey, name: BuildName) {
                             runPackage()
                         }
@@ -88,7 +88,7 @@ def call(Map pipelineParams) {
             stage('Archive') {
                 steps {
                     timestamps {
-                        prepareWorkspace(stashName: 'RelToArchive')
+                        prepareWorkSpace(stashName: 'RelToArchive')
                         bbNotify( key: buildKey, name: BuildName) {
                             runArchive(baseName: ArtifactBaseName)
                         }
@@ -100,7 +100,7 @@ def call(Map pipelineParams) {
             stage('Tagging') {
                 steps {
                     timestamps {
-                        prepareWorkspace(stashName: 'RelToTag')
+                        prepareWorkSpace(stashName: 'RelToTag')
                         bbNotify( key: buildKey, name: BuildName) {
                             runTagging(buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
                         }
