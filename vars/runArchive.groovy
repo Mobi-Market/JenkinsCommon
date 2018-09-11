@@ -3,7 +3,7 @@
 def call(Map config) {
 	def ArtifactBaseName = config?.baseName
 
-	def props = readProperties defaults: defaults, file: 'git.properties'
+	def props = readProperties file: 'git.properties'
 	echo props.toString()
 	def e = getEnvFromProps(props)
 	echo e.toString()
