@@ -13,7 +13,7 @@ def call(Map config) {
 
 	def props = readProperties file: 'git.properties'
 	echo props.toString()
-	def e = getEnvProps(props)
+	def e = getEnvFromProps(props)
 	echo e.toString()
 	
 	withEnv(e) {

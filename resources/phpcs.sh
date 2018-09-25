@@ -12,6 +12,6 @@ fi
 
 PHPCS_REPORT_FILE=$REPORT_ROOT/phpcs.checkstyle.xml
 
-phpcs --report-summary --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 --report-checkstyle=$PHPCS_REPORT_FILE app routes database config
+phpcs --standard PSR2 --report-summary --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 --report-checkstyle=$PHPCS_REPORT_FILE app routes database config
 
 echo "Running PHP CS...Done"
