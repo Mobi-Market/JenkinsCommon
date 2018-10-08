@@ -21,6 +21,6 @@ def call(Map config) {
 		zip dir: 'Artifacts', glob: '', zipFile: 'Artifacts/'+ArtifactBaseName+'-'+env.GITDESCRIBE+'.zip'
 	}
 
-    archive 'Artifacts/**'
+    archiveArtifacts 'Artifacts/**'
     step([$class: 'Fingerprinter', targets: 'Artifacts/**'])
 }
