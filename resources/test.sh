@@ -45,7 +45,7 @@ if [ -z "$UNITTESTDIR" ]; then
 fi
 
 if [ -z "$JUNIT_LOG" ]; then
-    JUNIT_LOG="$UNITTESTDIR/phpunit-junit.xml"
+    JUNIT_LOG="$UNITTESTDIR/$TEST_SUITE-phpunit-junit.xml"
 fi
 
 if [ -z "$TEST_SUITE" ]; then
@@ -70,17 +70,7 @@ if [ "$CREATE_COVERAGE_REPORT" = "true" ]; then
 
 
     echo cleaning up reports "$REPORTDIR"..Done
-    PHPUNIT_EXTRA_OPTS="--coverage-html $COVERRAGEDIR --coverage-clover $COVERRAGEDIR/coverage.xml"
-fi
-
-if [ ! -z "$PHPUNIT_EXCLUDE_GROUPS" ]; then
-    echo Skipping groups "$PHPUNIT_EXCLUDE_GROUPS"
-    PHPUNIT_EXTRA_OPTS="$PHPUNIT_EXTRA_OPTS --exclude-group $PHPUNIT_EXCLUDE_GROUPS"
-fi
-
-if [ ! -z "$PHPUNIT_ONLY_GROUP" ]; then
-    echo Only groups "$PHPUNIT_ONLY_GROUP"
-    PHPUNIT_EXTRA_OPTS="$PHPUNIT_EXTRA_OPTS --group $PHPUNIT_ONLY_GROUP"
+    PHPUNIT_EXTRA_OPTS="--coverage-html $COVERRAGEDIR --coverage-clover $COVERRAGEDIR/$TEST_SUITE-coverage.xml"
 fi
 
 # if [ "$STOP_ON_FAILURE" = "true" ]; then
@@ -92,7 +82,7 @@ fi
 # PHPUNIT_EXTRA_OPTS="$PHPUNIT_EXTRA_OPTS --printer "DiabloMedia\PHPUnit\Printer\PrettyPrinter""
 
 # echo Piping output to file
-# PHPUNIT_EXTRA_OPTS=$PHPUNIT_EXTRA_OPTS --testdox-text unitTestOutput.txt
+PHPUNIT_EXTRA_OPTS=$PHPUNIT_EXTRA_OPTS --testdox-text unitTestOutput.txt
 
 
 

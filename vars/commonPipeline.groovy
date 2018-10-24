@@ -21,6 +21,32 @@ def call(Map pipelineParams) {
                             runBuild()
                         }
 
+                        stash includes: '**', name: 'RelToUnit'
+                    }
+                }
+            }
+            stage('UnitTest') {
+                steps {
+                    timestamps {
+                        prepareWorkSpace(stashName: 'RelToUnit')
+
+                        bbNotify( key: buildKey, name: BuildName) {
+                            runUnitTests()
+                        }
+
+                        stash includes: '**', name: 'RelToFunctional'
+                    }
+                }
+            }
+            stage('FunctionalTest') {
+                steps {
+                    timestamps {
+                        prepareWorkSpace(stashName: 'RelToFunctional')
+
+                        bbNotify( key: buildKey, name: BuildName) {
+                            runFunctionalTests()
+                        }
+
                         stash includes: '**', name: 'RelToSTAN'
                     }
                 }
