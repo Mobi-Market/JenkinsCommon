@@ -8,6 +8,6 @@ def call(Map config) {
     ]) {
 	    sh(copyGlobalLibraryScript('test.sh'))
     }
-	def checkstyle = scanForIssues pattern: 'reports/**/JenkinsUnit-coverage.xml', reportEncoding: '', sourceCodeEncoding: '', tool: [$class: 'CheckStyle']
+	def checkstyle = scanForIssues pattern: 'Reports/**/JenkinsUnit-coverage.xml', reportEncoding: '', sourceCodeEncoding: '', tool: [$class: 'CheckStyle']
 	publishIssues id: 'copyPaste', name: 'Function Tests', issues:[checkstyle],  healthy: 10000, unHealthy: 9000
 }
