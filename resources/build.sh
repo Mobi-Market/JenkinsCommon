@@ -51,14 +51,9 @@ fi
 # no need for dev deps
 composer install --no-scripts
 
-#no for gulp
-npm cache clear --force
-npm install --no-optional --no-build-links
-# gulpify
-#npm run lint
-#npm run build
-#npm run build-css
-gulp --production
+yarn install
+
+yarn run production
 
 php artisan key:generate
 
