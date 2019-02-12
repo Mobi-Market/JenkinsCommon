@@ -38,7 +38,7 @@ GIT_BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
 if [ "$GIT_BRANCH" == "master" ]; then
   echo master branch detected using $WORKSPACE/.env.live
   cp $WORKSPACE/.env.live $WORKSPACE/.env
-elif [ "$GIT_BRANCH" == "develop" ]; then
+elif [ "$GIT_BRANCH" == "integration" ]; then
   echo develop branch detected using $WORKSPACE/.env.develop
   cp $WORKSPACE/.env.develop $WORKSPACE/.env
 else
