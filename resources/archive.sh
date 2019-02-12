@@ -41,8 +41,8 @@ fi
 
 #copy everything we need bar excluded dirs
 
-EXCLUDE_FILES="--exclude Jenkinsfile --exclude $CHANGEFILE_FILE --exclude gulpfile.js --exclude package.json --exclude package-lock.json --exclude composer.json --exclude composer.lock --exclude phpunit.xml --exclude server.php --exclude .git* --exclude swagger.json --exclude swagger.yaml --exclude .gitattributes --exclude readme.md "
-EXCLUDE_DIRECTORIES="--exclude .git/ --exclude storage/framework/cache/ --exclude storage/framework/sessions/ --exclude storage/framework/views/ --exclude resources/assets/ --exclude Artifacts/ --exclude reports/ --exclude node_modules/ --exclude Jenkins/ --exclude tests/"
+EXCLUDE_FILES="--exclude changefile.txt --exclude changelog.txt --exclude Jenkinsfile --exclude $CHANGEFILE_FILE --exclude gulpfile.js --exclude package.json --exclude package-lock.json --exclude composer.json --exclude composer.lock --exclude phpunit.xml --exclude server.php --exclude .git* --exclude swagger.json --exclude swagger.yaml --exclude .gitattributes --exclude readme.md --exclude yarn.lock --exclude .php_cs"
+EXCLUDE_DIRECTORIES="--exclude .git/ --exclude .vscode/ --exclude storage/logs --exclude storage/framework/cache/ --exclude storage/framework/sessions/ --exclude storage/framework/views/ --exclude resources/assets/ --exclude Artifacts/ --exclude reports/ --exclude node_modules/ --exclude Jenkins/ --exclude tests/"
 FULL_EXCLUDE="$EXCLUDE_FILES $EXCLUDE_DIRECTORIES"
 echo rsync -avz $FULL_EXCLUDE $WORKSPACE/ $ARTIFACT_ROOT --progress
 rsync -avz $FULL_EXCLUDE $WORKSPACE/ $ARTIFACT_ROOT --progress > $ARTIFACT_ROOT/rsync.log
