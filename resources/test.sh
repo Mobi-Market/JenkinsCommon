@@ -11,7 +11,7 @@ echo "Setting Up workspace...Done"
 
 echo "Setting up Reports..."
 if [ -z "$REPORTDIR" ]; then
-    REPORTDIR="$WORKSPACE/Reports"
+    REPORTDIR="$WORKSPACE/reports"
 fi
 echo "Setting up Reports...Done"
 
