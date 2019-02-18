@@ -1,4 +1,6 @@
-if ["$BRANCH_NAME" == "master"]
+echo branch is $BRANCH_NAME
+
+if ["$BRANCH_NAME" = "master"]
 then
 	echo pushing tag...
 	git tag -a v.$BUILD_NUMBER -m "release $BUILD_NUMBER"
@@ -6,7 +8,7 @@ then
 	echo pushing tag...Done
 fi
 
-if ["$BRANCH_NAME" == "integration"]
+if ["$BRANCH_NAME" = "integration"]
 then
 	echo pushing tag...
 	git tag -a rc.$BUILD_NUMBER -m "release candidate $BUILD_NUMBER"
