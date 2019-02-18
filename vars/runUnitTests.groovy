@@ -7,7 +7,7 @@ def call(Map config) {
 	withEnv([
         "BUILD_NUMBER="+buildNumber,
         "BRANCH_NAME="+branchName,
-		"TEST_SUITE=JenkinsUnit"
+		"COMPOSER_CMD=unit-tests"
     ]) {
 	    sh(copyGlobalLibraryScript('test.sh'))
     }
