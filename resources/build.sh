@@ -53,7 +53,7 @@ composer install --no-scripts
 
 yarn install
 
-yarn run dev
+yarn run prod
 
 php artisan key:generate
 
