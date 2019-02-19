@@ -19,4 +19,6 @@ php artisan cache:clear --env=prod
 php artisan clear-compiled
 php artisan optimize
 
+yarn run prod
+
 echo "Running Package...Done"

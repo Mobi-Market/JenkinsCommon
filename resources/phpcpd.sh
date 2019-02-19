@@ -6,7 +6,7 @@ if [ -z "$WORKSPACE" ]; then
   echo "WORKSPACE=$WORKSPACE";
 fi
 
-REPORT_ROOT="$WORKSPACE/Reports"
+REPORT_ROOT="$WORKSPACE/reports"
 
 if [ ! -d "$REPORT_ROOT" ]; then
     mkdir "$REPORT_ROOT"
