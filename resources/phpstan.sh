@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "Running PHP STAN..."
 if [ -z "$WORKSPACE" ]; then 
   WORKSPACE=$PWD

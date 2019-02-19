@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "Running PHP CS..."
 if [ -z "$WORKSPACE" ]; then 
   WORKSPACE=$PWD
