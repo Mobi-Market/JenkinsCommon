@@ -86,7 +86,7 @@ def call(Map pipelineParams) {
                         stash includes: '**', name: 'RelToDocument'
                     }
                 }
-            },
+            }
             stage('Documentation') {
                 steps {
                     timestamps {
