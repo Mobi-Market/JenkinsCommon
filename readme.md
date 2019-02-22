@@ -21,6 +21,8 @@ This common pipeline require you to have the following composer dev dependancies
 * [PHP-CS-Fixer](https://packagist.org/packages/friendsofphp/php-cs-fixer)
 * [PHP-Doc](https://packagist.org/packages/phpdocumentor/phpdocumentor#v2.9.0)
 
+NB: GIT must be installed and configured correctly on the build system.
+
 ## Steps
 The common Jenkins pipeline provides the following steps:
 
