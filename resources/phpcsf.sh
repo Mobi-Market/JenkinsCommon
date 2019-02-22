@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Running PHP CPD..."
+echo "Running PHP CS..."
 if [ -z "$WORKSPACE" ]; then 
   WORKSPACE=$PWD
   echo "WORKSPACE=$WORKSPACE";
@@ -12,6 +12,9 @@ if [ ! -d "$REPORT_ROOT" ]; then
     mkdir "$REPORT_ROOT"
 fi
 
-composer php-cpd-build
+composer format
 
-echo "Running PHP CPD...Done"
+git add .
+git commit -m "Build Server Commiting code fixer changes"
+git push origin 
+echo "Running PHP CS...Done"

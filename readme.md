@@ -17,7 +17,7 @@ This common pipeline require you to have the following composer dev dependancies
 * [PHPUnit](https://packagist.org/packages/phpunit/phpunit)
 * [PHP-Stan](https://packagist.org/packages/phpstan/phpstan)
 * [PHP-CPD](https://packagist.org/packages/sebastian/phpcpd)
-* [PHP-CS](https://packagist.org/packages/squizlabs/php_codesniffer)
+* -[PHP-CS](https://packagist.org/packages/squizlabs/php_codesniffer)- not compatible with PHP-CS-Fixer rules. Removed.
 * [PHP-CS-Fixer](https://packagist.org/packages/friendsofphp/php-cs-fixer)
 * [PHP-Doc](https://packagist.org/packages/phpdocumentor/phpdocumentor#v2.9.0)
 

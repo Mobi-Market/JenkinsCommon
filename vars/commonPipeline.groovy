@@ -75,18 +75,18 @@ def call(Map pipelineParams) {
                     }
                 }
             }
-            stage('Code Sniffer') {
+            stage('Code Fixer') {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToCS')
                         bbNotify( key: buildKey, name: BuildName) {
-                            runPHPCs()
+                            runFixer()
                         }
 
                         stash includes: '**', name: 'RelToDocument'
                     }
                 }
-            }
+            },
             stage('Documentation') {
                 steps {
                     timestamps {
