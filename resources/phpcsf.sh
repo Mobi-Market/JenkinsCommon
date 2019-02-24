@@ -14,7 +14,4 @@ fi
 
 composer format
 
-git add .
-git commit -m "Build Server Commiting code fixer changes"
-git push origin 
 echo "Running PHP CS...Done"
