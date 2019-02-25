@@ -11,7 +11,9 @@ if [ "$BRANCH_NAME" == "integration" ]; then
 	GIT_MSG="release candidate $BUILD_NUMBER"
 fi
 
+echo git tag -a $GIT_TAG -m $GIT_MSG
 git tag -a $GIT_TAG -m $GIT_MSG
+echo git push origin --tags
 git push origin --tags
 
 echo pushing tag...Done
