@@ -14,5 +14,5 @@ def call(Map config) {
 	// def checkstyle = scanForIssues pattern: 'Reports/**/JenkinsUnit-phpunit-junit.xml', reportEncoding: '', sourceCodeEncoding: '', tool: [$class: 'CheckStyle']
 	// publishIssues id: 'unittests', name: 'Unit Tests', issues:[checkstyle],  healthy: 10000, unHealthy: 9000
 	// junit 'Reports/**/JenkinsUnit-phpunit-junit.xml'
-	xunit([JUnit(deleteOutputFiles: true, failIfNotNew: false,  pattern: 'reports/JenkinsUnit-phpunit-junit.xml', skipNoTestFiles: false, stopProcessingIfError: false)])
+	xunit([PHPUnit(deleteOutputFiles: true, failIfNotNew: false,  pattern: 'reports/JenkinsUnit-phpunit-junit.xml', skipNoTestFiles: false, stopProcessingIfError: false)])
 }
