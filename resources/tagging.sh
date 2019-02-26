@@ -12,7 +12,7 @@ if [ "$BRANCH_NAME" == "integration" ]; then
 fi
 
 GIT_REMOTE="$(git ls-remote --get-url)"
-STRIPPED_URL="${$GIT_URL/https:\/\/}"
+STRIPPED_URL="${GIT_URL/https:\/\/}"
 REMOTE="https://$GIT_USER:$GIT_PASSWORD@$STRIPPED_URL"
 echo git remote = $GIT_REMOTE
 echo git tag -a $GIT_TAG -m $GIT_MSG
