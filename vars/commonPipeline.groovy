@@ -116,7 +116,7 @@ def call(Map pipelineParams) {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToArchive')
                         bbNotify( key: buildKey, name: BuildName) {
-                            runArchive(baseName: ArtifactBaseName)
+                            runArchive(baseName: ArtifactBaseName, buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
                         }
 
                         stash includes: '**', name: 'RelToTag'

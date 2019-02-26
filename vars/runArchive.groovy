@@ -10,17 +10,25 @@ def getEnvFromProps(props) {
 
 def call(Map config) {
 	def ArtifactBaseName = config?.baseName
+	def buildNumber = config?.buildNumber
+	def branchName = config?.branchName
 
 	def props = readProperties file: 'git.properties'
 	echo props.toString()
 	def e = getEnvFromProps(props)
 	echo e.toString()
+
+	def prefix = ''
+	if (branchName == 'master') {
+		prefix = 'v.'
+	}
+
+	if (branchName == 'integration') {
+		prefix = 'rc.'
+	}
 	
 	withEnv(e) {
 		sh(copyGlobalLibraryScript('archive.sh'))
-		zip dir: 'Artifacts', glob: '', zipFile: 'Artifacts/'+ArtifactBaseName+'-'+env.GITDESCRIBE+'.zip'
+		zip archive: true, dir: 'Artifacts', glob: '', zipFile: ArtifactBaseName+'-'+buildNumber+'.zip'
 	}
-
-    archiveArtifacts 'Artifacts/**'
-    step([$class: 'Fingerprinter', targets: 'Artifacts/**'])
 }
