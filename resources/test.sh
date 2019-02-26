@@ -21,15 +21,9 @@ if [ -z "$COVERRAGEDIR" ]; then
 fi
 echo "Setting up Coverage...Done"
 
-echo "Setting up unit tests report..."
-if [ -z "$UNITTESTDIR" ]; then
-    UNITTESTDIR="$REPORTDIR/unit-tests"
-fi
-echo "Setting up unit tests report...Done"
-
 echo "Setting up junit..."
 if [ -z "$JUNIT_LOG" ]; then
-    JUNIT_LOG="$UNITTESTDIR/$COMPOSER_CMD-phpunit-junit.xml"
+    JUNIT_LOG="$REPORTDIR/$COMPOSER_CMD-phpunit-junit.xml"
 fi
 echo "Setting up junit...Done"
 
