@@ -12,7 +12,7 @@ if [ "$BRANCH_NAME" == "integration" ]; then
 fi
 
 echo git tag -a $GIT_TAG -m $GIT_MSG
-git tag -a $GIT_TAG -m $GIT_MSG
+git tag -a "$GIT_TAG" -m "$GIT_MSG"
 echo git push origin --tags
 git push origin --tags
 
