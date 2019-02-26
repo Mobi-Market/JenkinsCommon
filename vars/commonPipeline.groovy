@@ -12,117 +12,117 @@ def call(Map pipelineParams) {
     pipeline {
         agent any
         stages {
-            stage('Build') {
-                steps {
-                    timestamps {
-                        checkout scm
+            // stage('Build') {
+            //     steps {
+            //         timestamps {
+            //             checkout scm
 
-                        bbNotify( key: buildKey, name: BuildName) {
-                            runBuild()
-                        }
+            //             bbNotify( key: buildKey, name: BuildName) {
+            //                 runBuild()
+            //             }
 
-                        stash includes: '**', name: 'RelToUnit'
-                    }
-                }
-            }
-            stage('UnitTest') {
-                steps {
-                    timestamps {
-                        prepareWorkSpace(stashName: 'RelToUnit')
+            //             stash includes: '**', name: 'RelToUnit'
+            //         }
+            //     }
+            // }
+            // stage('UnitTest') {
+            //     steps {
+            //         timestamps {
+            //             prepareWorkSpace(stashName: 'RelToUnit')
 
-                        bbNotify( key: buildKey, name: BuildName) {
-                            runUnitTests()
-                        }
+            //             bbNotify( key: buildKey, name: BuildName) {
+            //                 runUnitTests()
+            //             }
 
-                        stash includes: '**', name: 'RelToFunctional'
-                    }
-                }
-            }
-            stage('FunctionalTest') {
-                steps {
-                    timestamps {
-                        prepareWorkSpace(stashName: 'RelToFunctional')
+            //             stash includes: '**', name: 'RelToFunctional'
+            //         }
+            //     }
+            // }
+            // stage('FunctionalTest') {
+            //     steps {
+            //         timestamps {
+            //             prepareWorkSpace(stashName: 'RelToFunctional')
 
-                        bbNotify( key: buildKey, name: BuildName) {
-                            runFunctionalTests()
-                        }
+            //             bbNotify( key: buildKey, name: BuildName) {
+            //                 runFunctionalTests()
+            //             }
 
-                        stash includes: '**', name: 'RelToSTAN'
-                    }
-                }
-            }
-            stage('Static Analysis') {
-                steps {
-                    timestamps {
-                        prepareWorkSpace(stashName: 'RelToSTAN')
-                        bbNotify( key: buildKey, name: BuildName) {
-                            runPHPStan()
-                        }
+            //             stash includes: '**', name: 'RelToSTAN'
+            //         }
+            //     }
+            // }
+            // stage('Static Analysis') {
+            //     steps {
+            //         timestamps {
+            //             prepareWorkSpace(stashName: 'RelToSTAN')
+            //             bbNotify( key: buildKey, name: BuildName) {
+            //                 runPHPStan()
+            //             }
 
-                        stash includes: '**', name: 'RelToCPD'
-                    }
-                }
-            }
-            stage('Copy Paste Detector') {
-                steps {
-                    timestamps {
-                        prepareWorkSpace(stashName: 'RelToCPD')
-                        bbNotify( key: buildKey, name: BuildName) {
-                            runPHPCpd()
-                        }
+            //             stash includes: '**', name: 'RelToCPD'
+            //         }
+            //     }
+            // }
+            // stage('Copy Paste Detector') {
+            //     steps {
+            //         timestamps {
+            //             prepareWorkSpace(stashName: 'RelToCPD')
+            //             bbNotify( key: buildKey, name: BuildName) {
+            //                 runPHPCpd()
+            //             }
 
-                        stash includes: '**', name: 'RelToCS'
-                    }
-                }
-            }
-            stage('Code Fixer') {
-                steps {
-                    timestamps {
-                        prepareWorkSpace(stashName: 'RelToCS')
-                        bbNotify( key: buildKey, name: BuildName) {
-                            runFixer()
-                        }
+            //             stash includes: '**', name: 'RelToCS'
+            //         }
+            //     }
+            // }
+            // stage('Code Fixer') {
+            //     steps {
+            //         timestamps {
+            //             prepareWorkSpace(stashName: 'RelToCS')
+            //             bbNotify( key: buildKey, name: BuildName) {
+            //                 runFixer()
+            //             }
 
-                        stash includes: '**', name: 'RelToDocument'
-                    }
-                }
-            }
-            stage('Documentation') {
-                steps {
-                    timestamps {
-                        prepareWorkSpace(stashName: 'RelToDocument')
-                        bbNotify( key: buildKey, name: BuildName) {
-                            runDocument()
-                        }
+            //             stash includes: '**', name: 'RelToDocument'
+            //         }
+            //     }
+            // }
+            // stage('Documentation') {
+            //     steps {
+            //         timestamps {
+            //             prepareWorkSpace(stashName: 'RelToDocument')
+            //             bbNotify( key: buildKey, name: BuildName) {
+            //                 runDocument()
+            //             }
 
-                        stash includes: '**', name: 'RelToPackage'
-                    }
-                }
-            }
-            stage('Package') {
-                steps {
-                    timestamps {
-                        prepareWorkSpace(stashName: 'RelToPackage')
-                        bbNotify( key: buildKey, name: BuildName) {
-                            runPackage()
-                        }
+            //             stash includes: '**', name: 'RelToPackage'
+            //         }
+            //     }
+            // }
+            // stage('Package') {
+            //     steps {
+            //         timestamps {
+            //             prepareWorkSpace(stashName: 'RelToPackage')
+            //             bbNotify( key: buildKey, name: BuildName) {
+            //                 runPackage()
+            //             }
 
-                        stash includes: '**', name: 'RelToArchive'
-                    }
-                }
-            }
-            stage('Archive') {
-                steps {
-                    timestamps {
-                        prepareWorkSpace(stashName: 'RelToArchive')
-                        bbNotify( key: buildKey, name: BuildName) {
-                            runArchive(baseName: ArtifactBaseName)
-                        }
+            //             stash includes: '**', name: 'RelToArchive'
+            //         }
+            //     }
+            // }
+            // stage('Archive') {
+            //     steps {
+            //         timestamps {
+            //             prepareWorkSpace(stashName: 'RelToArchive')
+            //             bbNotify( key: buildKey, name: BuildName) {
+            //                 runArchive(baseName: ArtifactBaseName)
+            //             }
 
-                        stash includes: '**', name: 'RelToTag'
-                    }
-                }
-            }
+            //             stash includes: '**', name: 'RelToTag'
+            //         }
+            //     }
+            // }
             stage('Tagging') {
                 steps {
                     timestamps {
