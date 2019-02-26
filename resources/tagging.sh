@@ -11,6 +11,8 @@ if [ "$BRANCH_NAME" == "integration" ]; then
 	GIT_MSG="release candidate $BUILD_NUMBER"
 fi
 
+GIT_REMOTE="$(git ls-remote --get-url)"
+echo git remote = $GIT_REMOTE
 echo git tag -a $GIT_TAG -m $GIT_MSG
 git tag -a "$GIT_TAG" -m "$GIT_MSG"
 echo git push origin --tags
