@@ -4,7 +4,7 @@ def call(Map config) {
     def buildNumber = config?.buildNumber
     def branchName = config?.branchName
     
-    withCredentials([usernamePassword(credentialsId: '5554a026-150a-4f90-867a-e069defc3aca', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USER')]) {
+    withCredentials([usernamePassword(credentialsId: 'd08f94eb-fc16-489f-a320-0b694689846f', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USER')]) {
         withEnv([
             "BUILD_NUMBER="+buildNumber,
             "BRANCH_NAME="+branchName
