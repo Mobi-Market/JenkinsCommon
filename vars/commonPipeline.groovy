@@ -126,7 +126,7 @@ def call(Map pipelineParams) {
             stage('Tagging') {
                 steps {
                     timestamps {
-                        prepareWorkSpace(stashName: 'RelToTag')
+                        // prepareWorkSpace(stashName: 'RelToTag')
                         bbNotify( key: buildKey, name: BuildName) {
                             runTagging(buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
                         }
