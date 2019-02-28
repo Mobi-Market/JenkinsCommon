@@ -18,17 +18,8 @@ def call(Map config) {
 	def e = getEnvFromProps(props)
 	echo e.toString()
 
-	def prefix = ''
-	if (branchName == 'master') {
-		prefix = 'v.'
-	}
-
-	if (branchName == 'integration') {
-		prefix = 'rc.'
-	}
-	
 	withEnv(e) {
 		sh(copyGlobalLibraryScript('archive.sh'))
-		zip archive: true, dir: 'Artifacts', glob: '', zipFile: ArtifactBaseName+'-'+buildNumber+'.zip'
+		zip archive: true, dir: 'Artifacts', glob: '', zipFile: ArtifactBaseName+'.zip'
 	}
 }

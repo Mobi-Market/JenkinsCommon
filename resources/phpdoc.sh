@@ -6,16 +6,12 @@ if [ -z "$WORKSPACE" ]; then
   echo "WORKSPACE=$WORKSPACE";
 fi
 
-DOCS_ROOT="$WORKSPACE/Documentation"
+DOCS_ROOT="$WORKSPACE/documentation"
 
 if [ ! -d "$DOCS_ROOT" ]; then
     mkdir "$DOCS_ROOT"
 fi
-DOC_API="$DOCS_ROOT/api"
-if [ ! -d "$DOC_API" ]; then
-    mkdir "$DOC_API"
-fi
 
-phpdoc -d app -d database -d routes -d config -t $DOC_API
+composer php-doc
 
 echo "Running PHP Doc...Done"
