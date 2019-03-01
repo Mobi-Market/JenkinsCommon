@@ -87,18 +87,18 @@ def call(Map pipelineParams) {
                     }
                 }
             }
-            stage('Documentation') {
-                steps {
-                    timestamps {
-                        prepareWorkSpace(stashName: 'RelToDocument')
-                        bbNotify( key: buildKey, name: BuildName) {
-                            runDocument()
-                        }
+            // stage('Documentation') {
+            //     steps {
+            //         timestamps {
+            //             prepareWorkSpace(stashName: 'RelToDocument')
+            //             bbNotify( key: buildKey, name: BuildName) {
+            //                 runDocument()
+            //             }
 
-                        stash includes: '**', name: 'RelToPackage'
-                    }
-                }
-            }
+            //             stash includes: '**', name: 'RelToPackage'
+            //         }
+            //     }
+            // }
             stage('Package') {
                 steps {
                     timestamps {
