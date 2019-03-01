@@ -83,7 +83,7 @@ def call(Map pipelineParams) {
                             runFixer()
                         }
 
-                        stash includes: '**', name: 'RelToDocument'
+                        stash includes: '**', name: 'RelToPackage'
                     }
                 }
             }
