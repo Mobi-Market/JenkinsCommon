@@ -17,7 +17,7 @@ composer install --no-dev
 
 php artisan cache:clear --env=prod
 php artisan clear-compiled
-php artisan optimize
+# php artisan optimize
 
 yarn run prod
 
