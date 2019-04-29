@@ -13,7 +13,7 @@ if [ -f "$WORKSPACE/package.config" ]; then
   . "$WORKSPACE/package.config"
 fi
 
-composer install --no-dev --no-cache
+composer install --no-dev
 
 php artisan cache:clear --env=prod
 php artisan clear-compiled
