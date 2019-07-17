@@ -8,6 +8,7 @@ def call(Map pipelineParams) {
     def ArtifactBaseName = pipelineParams.system
     def BuildName = env.BRANCH_NAME + ' ' + env.BUILD_DISPLAY_NAME + '(Build)';
     def buildKey = 'Build';
+    def slackchannel = pipelineParams.system
 
     pipeline {
         agent any
@@ -17,7 +18,7 @@ def call(Map pipelineParams) {
                     timestamps {
                         checkout scm
 
-                        bbNotify( key: buildKey, name: BuildName) {
+                        bbNotify( key: buildKey, name: BuildName, channel: slackchannel) {
                             runBuild()
                         }
 
@@ -30,7 +31,7 @@ def call(Map pipelineParams) {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToUnit')
 
-                        bbNotify( key: buildKey, name: BuildName) {
+                        bbNotify( key: buildKey, name: BuildName, channel: slackchannel) {
                             runUnitTests()
                         }
 
@@ -43,7 +44,7 @@ def call(Map pipelineParams) {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToFunctional')
 
-                        bbNotify( key: buildKey, name: BuildName) {
+                        bbNotify( key: buildKey, name: BuildName, channel: slackchannel) {
                             runFunctionalTests()
                         }
 
@@ -55,7 +56,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToSTAN')
-                        bbNotify( key: buildKey, name: BuildName) {
+                        bbNotify( key: buildKey, name: BuildName, channel: slackchannel) {
                             runPHPStan()
                         }
 
@@ -67,7 +68,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToCPD')
-                        bbNotify( key: buildKey, name: BuildName) {
+                        bbNotify( key: buildKey, name: BuildName, channel: slackchannel) {
                             runPHPCpd()
                         }
 
@@ -79,7 +80,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToCS')
-                        bbNotify( key: buildKey, name: BuildName) {
+                        bbNotify( key: buildKey, name: BuildName, channel: slackchannel) {
                             runFixer()
                         }
 
@@ -103,7 +104,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToPackage')
-                        bbNotify( key: buildKey, name: BuildName) {
+                        bbNotify( key: buildKey, name: BuildName, channel: slackchannel) {
                             runPackage()
                         }
 
@@ -115,7 +116,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToArchive')
-                        bbNotify( key: buildKey, name: BuildName) {
+                        bbNotify( key: buildKey, name: BuildName, channel: slackchannel) {
                             runArchive(baseName: ArtifactBaseName, buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
                         }
 
