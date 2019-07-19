@@ -120,7 +120,7 @@ def call(Map pipelineParams) {
                             runArchive(baseName: ArtifactBaseName, buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
                         }
 
-                        // stash includes: '**', name: 'RelToTag'
+                        stash includes: '**', name: 'RelToTag'
                     }
                 }
             }
