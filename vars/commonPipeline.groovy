@@ -16,7 +16,7 @@ def call(Map pipelineParams) {
             stage('Build') {
                 steps {
                     timestamps {
-                        checkout scm
+                        checkout([$class: 'GitSCM', extensions: [[$class: 'CleanBeforeCheckout']]])
 
                         bbNotify( key: buildKey, name: BuildName, channel: slackchannel) {
                             runBuild()
