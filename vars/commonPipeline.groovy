@@ -7,8 +7,8 @@ def call(Map pipelineParams) {
 
     def ArtifactBaseName = pipelineParams.system
     def BuildName = env.BRANCH_NAME + ' ' + env.BUILD_DISPLAY_NAME + '(Build)';
-    def buildKey = 'Build';
-    def slackchannel = pipelineParams.system
+    def buildKey = 'Build_' + BUILD_NUMBER;
+    def commit = '';
 
     pipeline {
         agent any
@@ -16,9 +16,9 @@ def call(Map pipelineParams) {
             stage('Build') {
                 steps {
                     timestamps {
-                        checkout scm
+                        commit = checkout scm
 
-                        bbNotify( key: buildKey, name: BuildName, channel: slackchannel) {
+                        notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'Build') {
                             runBuild()
                         }
 
@@ -31,7 +31,7 @@ def call(Map pipelineParams) {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToUnit')
 
-                        bbNotify( key: buildKey, name: BuildName, channel: slackchannel) {
+                        notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'UnitTest') {
                             runUnitTests()
                         }
 
@@ -44,7 +44,7 @@ def call(Map pipelineParams) {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToFunctional')
 
-                        bbNotify( key: buildKey, name: BuildName, channel: slackchannel) {
+                        notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'FunctionalTest') {
                             runFunctionalTests()
                         }
 
@@ -56,7 +56,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToSTAN')
-                        bbNotify( key: buildKey, name: BuildName, channel: slackchannel) {
+                        notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'Static Analysis') {
                             runPHPStan()
                         }
 
@@ -68,7 +68,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToCPD')
-                        bbNotify( key: buildKey, name: BuildName, channel: slackchannel) {
+                        notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'Copy Paste Detector') {
                             runPHPCpd()
                         }
 
@@ -80,7 +80,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToCS')
-                        bbNotify( key: buildKey, name: BuildName, channel: slackchannel) {
+                        notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'Code Fixer') {
                             runFixer()
                         }
 
@@ -92,7 +92,7 @@ def call(Map pipelineParams) {
             //     steps {
             //         timestamps {
             //             prepareWorkSpace(stashName: 'RelToDocument')
-            //             bbNotify( key: buildKey, name: BuildName) {
+            //             notify( key: buildKey, name: BuildName) {
             //                 runDocument()
             //             }
 
@@ -104,7 +104,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToPackage')
-                        bbNotify( key: buildKey, name: BuildName, channel: slackchannel) {
+                        notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'Package') {
                             runPackage()
                         }
 
@@ -116,7 +116,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToArchive')
-                        bbNotify( key: buildKey, name: BuildName, channel: slackchannel) {
+                        notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'Archive') {
                             runArchive(baseName: ArtifactBaseName, buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
                         }
 
@@ -128,7 +128,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToTag')
-                        bbNotify( key: buildKey, name: BuildName) {
+                        notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'Tagging') {
                             runTagging(buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
                         }
                     }
