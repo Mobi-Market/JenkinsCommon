@@ -32,7 +32,7 @@ def call(Map pipelineParams) {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToUnit')
 
-                        notify( key: buildKey+'_UnitTests', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'UnitTest') {
+                        notify( key: buildKey+'_UnitTests', name: BuildName, commit: env.GIT_COMMIT, system: ArtifactBaseName, step: 'UnitTest') {
                             runUnitTests()
                         }
 
@@ -45,7 +45,7 @@ def call(Map pipelineParams) {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToFunctional')
 
-                        notify( key: buildKey+'_FunctionalTests', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'FunctionalTest') {
+                        notify( key: buildKey+'_FunctionalTests', name: BuildName, commit: env.GIT_COMMIT, system: ArtifactBaseName, step: 'FunctionalTest') {
                             runFunctionalTests()
                         }
 
@@ -57,7 +57,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToSTAN')
-                        notify( key: buildKey+'_StaticAnalysis', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Static Analysis') {
+                        notify( key: buildKey+'_StaticAnalysis', name: BuildName, commit: env.GIT_COMMIT, system: ArtifactBaseName, step: 'Static Analysis') {
                             runPHPStan()
                         }
 
@@ -69,7 +69,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToCPD')
-                        notify( key: buildKey+'_CopyPasteDetector', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Copy Paste Detector') {
+                        notify( key: buildKey+'_CopyPasteDetector', name: BuildName, commit: env.GIT_COMMIT, system: ArtifactBaseName, step: 'Copy Paste Detector') {
                             runPHPCpd()
                         }
 
@@ -81,7 +81,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToCS')
-                        notify( key: buildKey+'_CodeFixer', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Code Fixer') {
+                        notify( key: buildKey+'_CodeFixer', name: BuildName, commit: env.GIT_COMMIT, system: ArtifactBaseName, step: 'Code Fixer') {
                             runFixer()
                         }
 
@@ -105,7 +105,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToPackage')
-                        notify( key: buildKey+'_Package', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Package') {
+                        notify( key: buildKey+'_Package', name: BuildName, commit: env.GIT_COMMIT, system: ArtifactBaseName, step: 'Package') {
                             runPackage()
                         }
 
@@ -117,7 +117,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToArchive')
-                        notify( key: buildKey+'_Archive', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Archive') {
+                        notify( key: buildKey+'_Archive', name: BuildName, commit: env.GIT_COMMIT, system: ArtifactBaseName, step: 'Archive') {
                             runArchive(baseName: ArtifactBaseName, buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
                         }
 
