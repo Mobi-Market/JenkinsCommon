@@ -17,6 +17,8 @@ def call(Map config, Closure body) {
 	if (system == 'mobi-insurance') {
 		system = 'fulfilment'
 	}
+
+	echo "Notifying GH for system: ${system}"
 	
 	githubNotify account: 'Mobi-Market', context: buildKey, credentialsId: 'b345f1bc-cf1d-4024-bba6-64b66a0f2881', description: 'Starting ' + step + ' Step', gitApiUrl: '', repo: system, sha: commit, status: 'PENDING'
 	try {
