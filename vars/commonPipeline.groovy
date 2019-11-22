@@ -16,7 +16,11 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         checkout scm
-                        commit = sh(returnStdout: true, script: 'git rev-parse HEAD')
+                        script {
+                            commit = sh(returnStdout: true, script: 'git rev-parse HEAD')
+                        }
+
+                        echo "Commit SHA: ${commit}"
 
                         notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'Build') {
                             runBuild()
