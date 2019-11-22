@@ -22,7 +22,7 @@ def call(Map pipelineParams) {
 
                         echo "Commit SHA: ${commit}"
 
-                        notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'Build') {
+                        notify( key: buildKey, name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Build') {
                             runBuild()
                         }
 
@@ -35,7 +35,7 @@ def call(Map pipelineParams) {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToUnit')
 
-                        notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'UnitTest') {
+                        notify( key: buildKey, name: BuildName, commit: commit, system: ArtifactBaseName, step: 'UnitTest') {
                             runUnitTests()
                         }
 
@@ -48,7 +48,7 @@ def call(Map pipelineParams) {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToFunctional')
 
-                        notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'FunctionalTest') {
+                        notify( key: buildKey, name: BuildName, commit: commit, system: ArtifactBaseName, step: 'FunctionalTest') {
                             runFunctionalTests()
                         }
 
@@ -60,7 +60,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToSTAN')
-                        notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'Static Analysis') {
+                        notify( key: buildKey, name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Static Analysis') {
                             runPHPStan()
                         }
 
@@ -72,7 +72,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToCPD')
-                        notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'Copy Paste Detector') {
+                        notify( key: buildKey, name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Copy Paste Detector') {
                             runPHPCpd()
                         }
 
@@ -84,7 +84,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToCS')
-                        notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'Code Fixer') {
+                        notify( key: buildKey, name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Code Fixer') {
                             runFixer()
                         }
 
@@ -108,7 +108,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToPackage')
-                        notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'Package') {
+                        notify( key: buildKey, name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Package') {
                             runPackage()
                         }
 
@@ -120,7 +120,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToArchive')
-                        notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'Archive') {
+                        notify( key: buildKey, name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Archive') {
                             runArchive(baseName: ArtifactBaseName, buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
                         }
 
@@ -132,7 +132,7 @@ def call(Map pipelineParams) {
                 steps {
                     timestamps {
                         prepareWorkSpace(stashName: 'RelToTag')
-                        notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'Tagging') {
+                        notify( key: buildKey, name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Tagging') {
                             runTagging(buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
                         }
                     }
