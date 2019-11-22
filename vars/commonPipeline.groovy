@@ -124,20 +124,20 @@ def call(Map pipelineParams) {
                             runArchive(baseName: ArtifactBaseName, buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
                         }
 
-                        stash includes: '**', name: 'RelToTag'
+                        // stash includes: '**', name: 'RelToTag'
                     }
                 }
             }
-            stage('Tagging') {
-                steps {
-                    timestamps {
-                        prepareWorkSpace(stashName: 'RelToTag')
-                        notify( key: buildKey+'_Tagging', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Tagging') {
-                            runTagging(buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
-                        }
-                    }
-                }
-            }
+            // stage('Tagging') {
+            //     steps {
+            //         timestamps {
+            //             prepareWorkSpace(stashName: 'RelToTag')
+            //             notify( key: buildKey+'_Tagging', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Tagging') {
+            //                 runTagging(buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
+            //             }
+            //         }
+            //     }
+            // }
         }
     }
 }
