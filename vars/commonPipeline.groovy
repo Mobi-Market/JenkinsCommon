@@ -8,7 +8,6 @@ def call(Map pipelineParams) {
     def ArtifactBaseName = pipelineParams.system
     def BuildName = env.BRANCH_NAME + ' ' + env.BUILD_DISPLAY_NAME + '(Build)';
     def buildKey = 'Build_' + BUILD_NUMBER;
-    def commit = '';
 
     pipeline {
         agent any
@@ -16,7 +15,7 @@ def call(Map pipelineParams) {
             stage('Build') {
                 steps {
                     timestamps {
-                        commit = checkout(scm).GIT_COMMIT 
+                        def commit = checkout(scm).GIT_COMMIT 
 
                         notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'Build') {
                             runBuild()
