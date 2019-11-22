@@ -16,7 +16,7 @@ def call(Map pipelineParams) {
             stage('Build') {
                 steps {
                     timestamps {
-                        commit = checkout scm
+                        commit = checkout(scm).GIT_COMMIT 
 
                         notify( key: buildKey, name: BuildName, commit: commit, system: JOB_BASE_NAME, step: 'Build') {
                             runBuild()
