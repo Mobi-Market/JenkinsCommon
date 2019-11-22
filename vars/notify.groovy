@@ -18,13 +18,13 @@ def call(Map config, Closure body) {
 		system = 'fulfilment'
 	}
 	
-	githubNotify account: 'Mobi-Market', context: buildKey, credentialsId: 'b345f1bc-cf1d-4024-bba6-64b66a0f2881', description: 'Starting ' + step + ' Step', gitApiUrl: '', repo: system, sha: commit, status: 'pending'
+	githubNotify account: 'Mobi-Market', context: buildKey, credentialsId: 'b345f1bc-cf1d-4024-bba6-64b66a0f2881', description: 'Starting ' + step + ' Step', gitApiUrl: '', repo: system, sha: commit, status: 'PENDING'
 	try {
 		body()
-		githubNotify account: 'Mobi-Market', context: buildKey, credentialsId: 'b345f1bc-cf1d-4024-bba6-64b66a0f2881', description: 'Finished ' + step + ' Step', gitApiUrl: '', repo: system, sha: commit, status: 'success'
+		githubNotify account: 'Mobi-Market', context: buildKey, credentialsId: 'b345f1bc-cf1d-4024-bba6-64b66a0f2881', description: 'Finished ' + step + ' Step', gitApiUrl: '', repo: system, sha: commit, status: 'SUCCESS'
 	}
 	catch (err) {
-		githubNotify account: 'Mobi-Market', context: buildKey, credentialsId: 'b345f1bc-cf1d-4024-bba6-64b66a0f2881', description: 'Error ' + step + ': ' + err.toString(), gitApiUrl: '', repo: system, sha: commit, status: 'failure'
+		githubNotify account: 'Mobi-Market', context: buildKey, credentialsId: 'b345f1bc-cf1d-4024-bba6-64b66a0f2881', description: 'Error ' + step + ': ' + err.toString(), gitApiUrl: '', repo: system, sha: commit, status: 'FAILURE'
 		throw err
 	}
 }
