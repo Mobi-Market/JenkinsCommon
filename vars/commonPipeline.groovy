@@ -20,7 +20,7 @@ def call(Map pipelineParams) {
                             commit = sh(returnStdout: true, script: 'git rev-parse HEAD')
                         }
 
-                        echo "Commit SHA: ${commit}"
+                        echo "Commit SHA: ${env.GIT_COMMIT}"
 
                         notify( key: buildKey+'_Build', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Build') {
                             runBuild()
@@ -30,68 +30,68 @@ def call(Map pipelineParams) {
                     }
                 }
             }
-            stage('UnitTest') {
-                steps {
-                    timestamps {
-                        prepareWorkSpace(stashName: 'RelToUnit')
+            // stage('UnitTest') {
+            //     steps {
+            //         timestamps {
+            //             prepareWorkSpace(stashName: 'RelToUnit')
 
-                        notify( key: buildKey+'_UnitTests', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'UnitTest') {
-                            runUnitTests()
-                        }
+            //             notify( key: buildKey+'_UnitTests', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'UnitTest') {
+            //                 runUnitTests()
+            //             }
 
-                        stash includes: '**', name: 'RelToFunctional'
-                    }
-                }
-            }
-            stage('FunctionalTest') {
-                steps {
-                    timestamps {
-                        prepareWorkSpace(stashName: 'RelToFunctional')
+            //             stash includes: '**', name: 'RelToFunctional'
+            //         }
+            //     }
+            // }
+            // stage('FunctionalTest') {
+            //     steps {
+            //         timestamps {
+            //             prepareWorkSpace(stashName: 'RelToFunctional')
 
-                        notify( key: buildKey+'_FunctionalTests', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'FunctionalTest') {
-                            runFunctionalTests()
-                        }
+            //             notify( key: buildKey+'_FunctionalTests', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'FunctionalTest') {
+            //                 runFunctionalTests()
+            //             }
 
-                        stash includes: '**', name: 'RelToSTAN'
-                    }
-                }
-            }
-            stage('Static Analysis') {
-                steps {
-                    timestamps {
-                        prepareWorkSpace(stashName: 'RelToSTAN')
-                        notify( key: buildKey+'_StaticAnalysis', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Static Analysis') {
-                            runPHPStan()
-                        }
+            //             stash includes: '**', name: 'RelToSTAN'
+            //         }
+            //     }
+            // }
+            // stage('Static Analysis') {
+            //     steps {
+            //         timestamps {
+            //             prepareWorkSpace(stashName: 'RelToSTAN')
+            //             notify( key: buildKey+'_StaticAnalysis', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Static Analysis') {
+            //                 runPHPStan()
+            //             }
 
-                        stash includes: '**', name: 'RelToCPD'
-                    }
-                }
-            }
-            stage('Copy Paste Detector') {
-                steps {
-                    timestamps {
-                        prepareWorkSpace(stashName: 'RelToCPD')
-                        notify( key: buildKey+'_CopyPasteDetector', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Copy Paste Detector') {
-                            runPHPCpd()
-                        }
+            //             stash includes: '**', name: 'RelToCPD'
+            //         }
+            //     }
+            // }
+            // stage('Copy Paste Detector') {
+            //     steps {
+            //         timestamps {
+            //             prepareWorkSpace(stashName: 'RelToCPD')
+            //             notify( key: buildKey+'_CopyPasteDetector', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Copy Paste Detector') {
+            //                 runPHPCpd()
+            //             }
 
-                        stash includes: '**', name: 'RelToCS'
-                    }
-                }
-            }
-            stage('Code Fixer') {
-                steps {
-                    timestamps {
-                        prepareWorkSpace(stashName: 'RelToCS')
-                        notify( key: buildKey+'_CodeFixer', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Code Fixer') {
-                            runFixer()
-                        }
+            //             stash includes: '**', name: 'RelToCS'
+            //         }
+            //     }
+            // }
+            // stage('Code Fixer') {
+            //     steps {
+            //         timestamps {
+            //             prepareWorkSpace(stashName: 'RelToCS')
+            //             notify( key: buildKey+'_CodeFixer', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Code Fixer') {
+            //                 runFixer()
+            //             }
 
-                        stash includes: '**', name: 'RelToPackage'
-                    }
-                }
-            }
+            //             stash includes: '**', name: 'RelToPackage'
+            //         }
+            //     }
+            // }
             // stage('Documentation') {
             //     steps {
             //         timestamps {
@@ -104,37 +104,27 @@ def call(Map pipelineParams) {
             //         }
             //     }
             // }
-            stage('Package') {
-                steps {
-                    timestamps {
-                        prepareWorkSpace(stashName: 'RelToPackage')
-                        notify( key: buildKey+'_Package', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Package') {
-                            runPackage()
-                        }
-
-                        stash includes: '**', name: 'RelToArchive'
-                    }
-                }
-            }
-            stage('Archive') {
-                steps {
-                    timestamps {
-                        prepareWorkSpace(stashName: 'RelToArchive')
-                        notify( key: buildKey+'_Archive', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Archive') {
-                            runArchive(baseName: ArtifactBaseName, buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
-                        }
-
-                        // stash includes: '**', name: 'RelToTag'
-                    }
-                }
-            }
-            // stage('Tagging') {
+            // stage('Package') {
             //     steps {
             //         timestamps {
-            //             prepareWorkSpace(stashName: 'RelToTag')
-            //             notify( key: buildKey+'_Tagging', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Tagging') {
-            //                 runTagging(buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
+            //             prepareWorkSpace(stashName: 'RelToPackage')
+            //             notify( key: buildKey+'_Package', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Package') {
+            //                 runPackage()
             //             }
+
+            //             stash includes: '**', name: 'RelToArchive'
+            //         }
+            //     }
+            // }
+            // stage('Archive') {
+            //     steps {
+            //         timestamps {
+            //             prepareWorkSpace(stashName: 'RelToArchive')
+            //             notify( key: buildKey+'_Archive', name: BuildName, commit: commit, system: ArtifactBaseName, step: 'Archive') {
+            //                 runArchive(baseName: ArtifactBaseName, buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
+            //             }
+
+            //             // stash includes: '**', name: 'RelToTag'
             //         }
             //     }
             // }
