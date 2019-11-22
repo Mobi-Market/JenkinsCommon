@@ -12,12 +12,6 @@ if [ -f "$WORKSPACE/build.config" ]; then
   . "$WORKSPACE/build.config"
 fi
 
-echo "setting composer auth..."
-echo "BB USR= $BITBUCKET_USR";
-composer config -a -g http-basic.bitbucket.org $BITBUCKET_USR $BITBUCKET_PWD
-echo "BB PWD= $BITBUCKET_PWD";
-echo "setting composer auth...Done"
-
 # if [ -d "$WORKSPACE/vendor" ]; then
 #   echo "removing $WORKSPACE/vendor"
 #   rm -rf "$WORKSPACE/vendor"
