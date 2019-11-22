@@ -14,7 +14,7 @@ def call(Map config, Closure body) {
 	if (system == 'GoodBuyTech') {
 		system = 'gbt'
 	}
-	if (system == 'mobi-insurance') {
+	if (system == 'MobiInsurance') {
 		system = 'fulfilment'
 	}
 
