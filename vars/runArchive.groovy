@@ -20,6 +20,9 @@ def call(Map config) {
 
 	withEnv(e) {
 		sh(copyGlobalLibraryScript('archive.sh'))
+		if (fileExists(ArtifactBaseName+'.zip')) {
+			fileOperations([fileDeleteOperation(excludes: '', includes: ArtifactBaseName+'.zip')])
+		}
 		zip archive: true, dir: 'Artifacts', glob: '', zipFile: ArtifactBaseName+'.zip'
 	}
 }
