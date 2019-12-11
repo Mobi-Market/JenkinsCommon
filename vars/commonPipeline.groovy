@@ -23,69 +23,69 @@ def call(Map pipelineParams) {
                             runBuild()
                         }
 
-                        stash includes: '**', name: 'RelToUnit'
+                        // stash includes: '**', name: 'RelToUnit'
                     }
                 }
             }
             stage('UnitTest') {
                 steps {
                     timestamps {
-                        prepareWorkSpace(stashName: 'RelToUnit')
+                        // prepareWorkSpace(stashName: 'RelToUnit')
 
                         notify( key: buildKey+'_UnitTests', name: BuildName, commit: env.GIT_COMMIT, system: ArtifactBaseName, step: 'UnitTest') {
                             runUnitTests()
                         }
 
-                        stash includes: '**', name: 'RelToFunctional'
+                        // stash includes: '**', name: 'RelToFunctional'
                     }
                 }
             }
             stage('FunctionalTest') {
                 steps {
                     timestamps {
-                        prepareWorkSpace(stashName: 'RelToFunctional')
+                        // prepareWorkSpace(stashName: 'RelToFunctional')
 
                         notify( key: buildKey+'_FunctionalTests', name: BuildName, commit: env.GIT_COMMIT, system: ArtifactBaseName, step: 'FunctionalTest') {
                             runFunctionalTests()
                         }
 
-                        stash includes: '**', name: 'RelToSTAN'
+                        // stash includes: '**', name: 'RelToSTAN'
                     }
                 }
             }
             stage('Static Analysis') {
                 steps {
                     timestamps {
-                        prepareWorkSpace(stashName: 'RelToSTAN')
+                        // prepareWorkSpace(stashName: 'RelToSTAN')
                         notify( key: buildKey+'_StaticAnalysis', name: BuildName, commit: env.GIT_COMMIT, system: ArtifactBaseName, step: 'Static Analysis') {
                             runPHPStan()
                         }
 
-                        stash includes: '**', name: 'RelToCPD'
+                        // stash includes: '**', name: 'RelToCPD'
                     }
                 }
             }
             stage('Copy Paste Detector') {
                 steps {
                     timestamps {
-                        prepareWorkSpace(stashName: 'RelToCPD')
+                        // prepareWorkSpace(stashName: 'RelToCPD')
                         notify( key: buildKey+'_CopyPasteDetector', name: BuildName, commit: env.GIT_COMMIT, system: ArtifactBaseName, step: 'Copy Paste Detector') {
                             runPHPCpd()
                         }
 
-                        stash includes: '**', name: 'RelToCS'
+                        // stash includes: '**', name: 'RelToCS'
                     }
                 }
             }
             stage('Code Fixer') {
                 steps {
                     timestamps {
-                        prepareWorkSpace(stashName: 'RelToCS')
+                        // prepareWorkSpace(stashName: 'RelToCS')
                         notify( key: buildKey+'_CodeFixer', name: BuildName, commit: env.GIT_COMMIT, system: ArtifactBaseName, step: 'Code Fixer') {
                             runFixer()
                         }
 
-                        stash includes: '**', name: 'RelToPackage'
+                        // stash includes: '**', name: 'RelToPackage'
                     }
                 }
             }
@@ -104,19 +104,19 @@ def call(Map pipelineParams) {
             stage('Package') {
                 steps {
                     timestamps {
-                        prepareWorkSpace(stashName: 'RelToPackage')
+                        // prepareWorkSpace(stashName: 'RelToPackage')
                         notify( key: buildKey+'_Package', name: BuildName, commit: env.GIT_COMMIT, system: ArtifactBaseName, step: 'Package') {
                             runPackage()
                         }
 
-                        stash includes: '**', name: 'RelToArchive'
+                        // stash includes: '**', name: 'RelToArchive'
                     }
                 }
             }
             stage('Archive') {
                 steps {
                     timestamps {
-                        prepareWorkSpace(stashName: 'RelToArchive')
+                        // prepareWorkSpace(stashName: 'RelToArchive')
                         notify( key: buildKey+'_Archive', name: BuildName, commit: env.GIT_COMMIT, system: ArtifactBaseName, step: 'Archive') {
                             runArchive(baseName: ArtifactBaseName, buildNumber: env.BUILD_NUMBER, branchName: env.BRANCH_NAME)
                         }
