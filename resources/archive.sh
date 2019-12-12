@@ -42,7 +42,7 @@ fi
 #copy everything we need bar excluded dirs
 EXCLUDE_SYS_FILES="--exclude .php_cs.cache --exclude .prettierignore --exclude .prettierrc --exclude rsync.txt --exclude yarn-error.txt --exclude scripts/"
 EXCLUDE_FILES="--exclude .phpunit.result.cache --exclude phpstan.neon --exclude changefile.txt --exclude changelog.txt --exclude Jenkinsfile --exclude $CHANGEFILE_FILE --exclude gulpfile.js --exclude package.json --exclude package-lock.json --exclude composer.json --exclude composer.lock --exclude phpunit.xml --exclude server.php --exclude .git* --exclude swagger.json --exclude swagger.yaml --exclude .gitattributes --exclude readme.md --exclude yarn.lock --exclude .php_cs"
-EXCLUDE_FILES_TWO="--exclude .editorconfig --exclude .phpunit.result.cache --exclude phpstan.neon --exclude worker.txt --exclude yarn-error.txt --exclude rsync.txt"
+EXCLUDE_FILES_TWO="--exclude .editorconfig --exclude .phpunit.result.cache --exclude phpstan.neon --exclude worker.txt --exclude yarn-error.txt --exclude rsync.txt --exclude *.zip"
 EXCLUDE_DIRECTORIES="--exclude .git/ --exclude .vscode/ --exclude storage/ --exclude resources/assets/ --exclude node_modules/ --exclude Jenkins/ --exclude tests/ "
 FULL_EXCLUDE="$EXCLUDE_SYS_FILES $EXCLUDE_FILES $EXCLUDE_DIRECTORIES"
 echo rsync -avz $FULL_EXCLUDE $WORKSPACE/ $ARTIFACT_ROOT --progress
