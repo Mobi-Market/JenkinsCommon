@@ -6,48 +6,48 @@ if [ -z "$WORKSPACE" ]; then
   WORKSPACE=$(pwd)
 fi
 
-if [ -f "$WORKSPACE/archive.config" ]; then
-  . "$WORKSPACE/archive.config"
-fi
-
-ARTIFACT_ROOT="$WORKSPACE/Artifacts"
-ARTIFACT_DOCS_ROOT="$ARTIFACT_ROOT/Documentation"
-
-if [ -d "$ARTIFACT_ROOT" ]; then
-  rm -rf $WORKSPACE/Artifacts
-fi
-
-mkdir "$ARTIFACT_ROOT"
-
-if [ ! -d "$ARTIFACT_DOCS_ROOT" ]; then
-    mkdir "$ARTIFACT_DOCS_ROOT"
-fi
-
-if [ -z "$CHANGELOG_FILE" ]; then
-    CHANGELOG_FILE="$WORKSPACE/changelog.txt"
-fi
-
-if [ -z "$CHANGEFILE_FILE" ]; then
-    CHANGEFILE_FILE="$WORKSPACE/changefile.txt"
-fi
-
-if [ -f "$CHANGELOG_FILE" ]; then
-  cp "$CHANGELOG_FILE" "$ARTIFACT_DOCS_ROOT/changelog.txt"
-fi
-
-if [ -f "$CHANGEFILE_FILE" ]; then
-  cp "$CHANGEFILE_FILE" "$ARTIFACT_DOCS_ROOT/changefile.txt"
-fi
-
-#copy everything we need bar excluded dirs
-EXCLUDE_SYS_FILES="--exclude .php_cs.cache --exclude .prettierignore --exclude .prettierrc --exclude rsync.txt --exclude yarn-error.txt --exclude scripts/"
-EXCLUDE_FILES="--exclude .phpunit.result.cache --exclude phpstan.neon --exclude changefile.txt --exclude changelog.txt --exclude Jenkinsfile --exclude $CHANGEFILE_FILE --exclude gulpfile.js --exclude package.json --exclude package-lock.json --exclude composer.json --exclude composer.lock --exclude phpunit.xml --exclude server.php --exclude .git* --exclude swagger.json --exclude swagger.yaml --exclude .gitattributes --exclude readme.md --exclude yarn.lock --exclude .php_cs"
-EXCLUDE_FILES_TWO="--exclude .editorconfig --exclude .phpunit.result.cache --exclude phpstan.neon --exclude worker.txt --exclude yarn-error.txt --exclude rsync.txt --exclude *.zip"
-EXCLUDE_DIRECTORIES="--exclude .git/ --exclude .vscode/ --exclude storage/ --exclude resources/assets/ --exclude node_modules/ --exclude Jenkins/ --exclude tests/ "
-FULL_EXCLUDE="$EXCLUDE_SYS_FILES $EXCLUDE_FILES $EXCLUDE_DIRECTORIES"
-echo rsync -avz $FULL_EXCLUDE $WORKSPACE/ $ARTIFACT_ROOT --progress
-rsync -avz $FULL_EXCLUDE $WORKSPACE/ $ARTIFACT_ROOT --progress > $ARTIFACT_ROOT/rsync.log
-
-rm $ARTIFACT_ROOT/.env.live
-rm $ARTIFACT_ROOT/.env.develop
-rm $ARTIFACT_ROOT/.env.local
+rm -rf Artifacts
+rm .php_cs.cache 
+rm .prettierignore 
+rm .prettierrc 
+rm rsync.txt 
+rm yarn-error.txt 
+rm -rf scripts
+rm .phpunit.result.cache 
+rm phpstan.neon 
+rm changefile.txt 
+rm changelog.txt 
+rm Jenkinsfile  
+rm gulpfile.js 
+rm package.json 
+rm package-lock.json 
+rm composer.json 
+rm composer.lock 
+rm phpunit.xml 
+rm server.php 
+rm -rf .git 
+rm swagger.json 
+rm swagger.yaml 
+rm .gitattributes 
+rm readme.md 
+rm yarn.lock 
+rm .php_cs
+rm .editorconfig 
+rm .phpunit.result.cache 
+rm phpstan.neon 
+rm worker.txt 
+rm yarn-error.txt 
+rm rsync.txt 
+rm *.zip
+rm .git 
+rm -rf .vscode
+rm -rf storage
+rm -rf resources/assets
+rm -rf node_modules 
+rm -rf Jenkins
+rm -rf tests
+rm .env.live
+rm .env.develop
+rm .env.local
+rm .env
+rm debugArtisan

@@ -23,6 +23,6 @@ def call(Map config) {
 		if (fileExists(ArtifactBaseName+'.zip')) {
 			fileOperations([fileDeleteOperation(excludes: '', includes: ArtifactBaseName+'.zip')])
 		}
-		zip archive: true, dir: 'Artifacts', glob: '', zipFile: ArtifactBaseName+'.zip'
+		zip archive: true, dir: '', glob: '', zipFile: ArtifactBaseName+'.zip'
 	}
 }
