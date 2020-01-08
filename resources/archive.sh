@@ -7,47 +7,47 @@ if [ -z "$WORKSPACE" ]; then
 fi
 
 rm -rf Artifacts
-rm .php_cs.cache 
-rm .prettierignore 
-rm .prettierrc 
-rm rsync.txt 
-rm yarn-error.txt 
+rm -f .php_cs.cache 
+rm -f .prettierignore 
+rm -f .prettierrc 
+rm -f rsync.txt 
+rm -f yarn-error.txt 
 rm -rf scripts
-rm .phpunit.result.cache 
-rm phpstan.neon 
-rm changefile.txt 
-rm changelog.txt 
-rm Jenkinsfile  
-rm gulpfile.js 
-rm package.json 
-rm package-lock.json 
-rm composer.json 
-rm composer.lock 
-rm phpunit.xml 
-rm server.php 
+rm -f .phpunit.result.cache 
+rm -f phpstan.neon 
+rm -f changefile.txt 
+rm -f changelog.txt 
+rm -f Jenkinsfile  
+rm -f gulpfile.js 
+rm -f package.json 
+rm -f package-lock.json 
+rm -f composer.json 
+rm -f composer.lock 
+rm -f phpunit.xml 
+rm -f server.php 
 rm -rf .git 
-rm swagger.json 
-rm swagger.yaml 
-rm .gitattributes 
-rm readme.md 
-rm yarn.lock 
-rm .php_cs
-rm .editorconfig 
-rm .phpunit.result.cache 
-rm phpstan.neon 
-rm worker.txt 
-rm yarn-error.txt 
-rm rsync.txt 
-rm *.zip
-rm .git 
+rm -f swagger.json 
+rm -f swagger.yaml 
+rm -f .gitattributes 
+rm -f readme.md 
+rm -f yarn.lock 
+rm -f .php_cs
+rm -f .editorconfig 
+rm -f .phpunit.result.cache 
+rm -f phpstan.neon 
+rm -f worker.txt 
+rm -f yarn-error.txt 
+rm -f rsync.txt 
+rm -f *.zip
+rm -f .git 
 rm -rf .vscode
 rm -rf storage
 rm -rf resources/assets
 rm -rf node_modules 
 rm -rf Jenkins
 rm -rf tests
-rm .env.live
-rm .env.develop
-rm .env.local
-rm .env
-rm debugArtisan
+rm -f .env.live
+rm -f .env.develop
+rm -f .env.local
+rm -f .env
+rm -f debugArtisan
