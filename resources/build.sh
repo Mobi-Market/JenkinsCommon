@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
-
+echo .
+echo "Using PHP verion:"
+php -v
+echo .
 echo "Running build..."
 if [ -z "$WORKSPACE" ]; then 
   WORKSPACE=$PWD
