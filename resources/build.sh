@@ -2,7 +2,7 @@
 set -e
 echo .
 echo "Using PHP verion:"
-PHP_EXEC -v
+$PHP_EXEC -v
 echo .
 echo "Running build..."
 if [ -z "$WORKSPACE" ]; then 
@@ -46,7 +46,7 @@ fi
 #ensure latest composer
 # composer self-update
 # no need for dev deps
-PHP_EXEC composer install --no-scripts
+$PHP_EXEC /usr/local/bin/composer install --no-scripts
 
 phive install
 
@@ -54,6 +54,6 @@ yarn install
 
 yarn run prod
 
-php artisan key:generate
+$PHP_EXEC artisan key:generate
 
 echo "Running build...Complete"
