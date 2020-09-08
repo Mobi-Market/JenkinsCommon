@@ -48,6 +48,8 @@ fi
 # no need for dev deps
 PHP_EXEC composer install --no-scripts
 
+phive install
+
 yarn install
 
 yarn run prod
