@@ -2,7 +2,7 @@
 set -e
 echo .
 echo "Using PHP verion:"
-php -v
+PHP_EXEC -v
 echo .
 echo "Running build..."
 if [ -z "$WORKSPACE" ]; then 
@@ -46,7 +46,7 @@ fi
 #ensure latest composer
 # composer self-update
 # no need for dev deps
-composer install --no-scripts
+PHP_EXEC composer install --no-scripts
 
 yarn install
 
