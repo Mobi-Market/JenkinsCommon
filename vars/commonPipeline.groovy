@@ -12,12 +12,7 @@ def call(Map pipelineParams) {
     }
     def BuildName = env.BRANCH_NAME + ' ' + env.BUILD_DISPLAY_NAME + '(Build)';
     def buildKey = 'Build_' + BUILD_NUMBER;
-    withEnv([
-        "BUILD_NUMBER="+env.BUILD_NUMBER,
-        "BRANCH_NAME="+env.BRANCH_NAME,
-		"COMPOSER_CMD=unit-tests",
-		"PHP_EXEC="+phpversion
-    ]) {
+    
         pipeline {
             agent any
             stages {
@@ -136,5 +131,4 @@ def call(Map pipelineParams) {
                 }
             }
         }
-    }
 }
