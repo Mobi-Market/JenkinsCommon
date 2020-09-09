@@ -54,7 +54,7 @@ phive --no-progress install --trust-gpg-keys E82B2FB314E9906E,4AA394086372C20A,4
 yarn install
 
 if [ "$SYSTEM_NAME" == "MobiMarket" ]; then
-  yarn run dev
+  yarn run develop
 else 
   yarn run prod
 fi
