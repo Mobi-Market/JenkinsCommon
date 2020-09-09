@@ -13,7 +13,9 @@ def call(Map pipelineParams) {
     def BuildName = env.BRANCH_NAME + ' ' + env.BUILD_DISPLAY_NAME + '(Build)';
     def buildKey = 'Build_' + BUILD_NUMBER;
     withEnv([
-        "PHP_EXEC="+phpversion
+        "PHP_EXEC="+phpversion,
+        "GIT_BRANCH="+env.BRANCH_NAME,
+        "BRANCH_NAME="+env.BRANCH_NAME
     ]) {
         pipeline {
             agent any
