@@ -5,6 +5,7 @@ echo "Using PHP verion:"
 $PHP_EXEC -v
 echo .
 echo "Running build..."
+echo Name: $BUILD_NAME
 if [ -z "$WORKSPACE" ]; then 
   WORKSPACE=$PWD
   echo "WORKSPACE=$WORKSPACE";
@@ -52,7 +53,11 @@ phive --no-progress install --trust-gpg-keys E82B2FB314E9906E,4AA394086372C20A,4
 
 yarn install
 
-yarn run prod
+if [ "$GIT_BRANCH" == "lifeboat" ]; then
+  yarn run dev
+else 
+  yarn run prod
+fi
 
 $PHP_EXEC artisan key:generate
 
