@@ -5,7 +5,7 @@ echo "Using PHP verion:"
 $PHP_EXEC -v
 echo .
 echo "Running build..."
-echo Name: $BUILD_NAME
+echo Name: $SYSTEM_NAME
 if [ -z "$WORKSPACE" ]; then 
   WORKSPACE=$PWD
   echo "WORKSPACE=$WORKSPACE";
@@ -53,7 +53,7 @@ phive --no-progress install --trust-gpg-keys E82B2FB314E9906E,4AA394086372C20A,4
 
 yarn install
 
-if [ "$GIT_BRANCH" == "lifeboat" ]; then
+if [ "$SYSTEM_NAME" == "MobiMarket" ]; then
   yarn run dev
 else 
   yarn run prod

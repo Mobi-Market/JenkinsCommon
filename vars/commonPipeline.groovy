@@ -16,7 +16,7 @@ def call(Map pipelineParams) {
         "PHP_EXEC="+phpversion,
         "GIT_BRANCH="+env.BRANCH_NAME,
         "BRANCH_NAME="+env.BRANCH_NAME,
-        "BUILD_NAME="+env.JOB_NAME
+        "SYSTEM_NAME="+ArtifactBaseName
     ]) {
         pipeline {
             agent any
