@@ -31,7 +31,7 @@ fi
 # fi
 
 GIT_BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
-
+echo detected $GIT_BRANCH branch
 if [ "$GIT_BRANCH" == "master" ]; then
   echo master branch detected using $WORKSPACE/.env.live
   cp $WORKSPACE/.env.live $WORKSPACE/.env
