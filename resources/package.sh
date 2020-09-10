@@ -13,7 +13,14 @@ if [ -f "$WORKSPACE/package.config" ]; then
   . "$WORKSPACE/package.config"
 fi
 
-composer install --no-dev
+
+
+echo detected $GIT_BRANCH branch
+if [ "$GIT_BRANCH" == "master" ]; then
+  $PHP_EXEC /usr/local/bin/composer install --no-dev --no-interaction
+else
+  $PHP_EXEC /usr/local/bin/composer install --no-interaction
+fi
 
 php artisan cache:clear --env=prod
 php artisan clear-compiled
