@@ -59,6 +59,6 @@ else
   yarn run prod
 fi
 
-$PHP_EXEC artisan key:generate
+$PHP_EXEC artisan key:generate --force
 
 echo "Running build...Complete"
