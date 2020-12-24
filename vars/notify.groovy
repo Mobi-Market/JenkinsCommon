@@ -28,6 +28,7 @@ def call(Map config, Closure body) {
 		githubNotify account: 'Mobi-Market', context: buildKey, credentialsId: '1ff0d140-8690-4233-9ff5-870d3e648cae', description: 'Finished ' + step + ' Step', gitApiUrl: '', repo: system, status: 'SUCCESS'
 	}
 	catch (err) {
+		echo err.toString();
 		// githubNotify account: 'Mobi-Market', context: buildKey, credentialsId: 'b345f1bc-cf1d-4024-bba6-64b66a0f2881', description: 'Error ' + step + ': ' + err.toString(), gitApiUrl: '', repo: system, status: 'FAILURE'
 		githubNotify account: 'Mobi-Market', context: buildKey, credentialsId: '1ff0d140-8690-4233-9ff5-870d3e648cae', description: 'Error ' + step + ' Step', gitApiUrl: '', repo: system, status: 'FAILURE'
 		throw err
