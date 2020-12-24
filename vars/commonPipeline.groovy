@@ -49,19 +49,19 @@ def call(Map pipelineParams) {
                         }
                     }
                 }
-                stage('FunctionalTest') {
-                    steps {
-                        timestamps {
-                            // prepareWorkSpace(stashName: 'RelToFunctional')
+                // stage('FunctionalTest') {
+                //     steps {
+                //         timestamps {
+                //             // prepareWorkSpace(stashName: 'RelToFunctional')
 
-                            notify( key: 'FunctionalTests', name: BuildName, commit: env.GIT_COMMIT, system: ArtifactBaseName, step: 'FunctionalTest') {
-                                runFunctionalTests()
-                            }
+                //             notify( key: 'FunctionalTests', name: BuildName, commit: env.GIT_COMMIT, system: ArtifactBaseName, step: 'FunctionalTest') {
+                //                 runFunctionalTests()
+                //             }
 
-                            // stash includes: '**', name: 'RelToSTAN'
-                        }
-                    }
-                }
+                //             // stash includes: '**', name: 'RelToSTAN'
+                //         }
+                //     }
+                // }
                 stage('Static Analysis') {
                     steps {
                         timestamps {
