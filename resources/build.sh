@@ -49,8 +49,8 @@ fi
 # no need for dev deps
 $PHP_EXEC /usr/bin/composer install --no-scripts
 
-phive update --trust-gpg-keys
-phive --no-progress install --trust-gpg-keys php-cs-fixer phpcpd phpunit phpstan
+phive update
+phive --no-progress install --trust-gpg-keys E82B2FB314E9906E,4AA394086372C20A,4AA394086372C20A,31C7E470E2138192,8AC0BAA79732DD42,2A8299CE842DD38C,4AA394086372C20A,CF1A108D0E7AE720,4AA394086372C20A
 
 yarn install
 
