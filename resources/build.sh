@@ -49,7 +49,7 @@ fi
 # no need for dev deps
 $PHP_EXEC /usr/bin/composer install --no-scripts
 
-phive --no-progress install
+phive --no-progress install --trust-gpg-key
 
 yarn install
 
