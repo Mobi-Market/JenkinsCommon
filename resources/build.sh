@@ -52,7 +52,7 @@ $PHP_EXEC /usr/bin/composer install --no-scripts
 echo I am running as: 
 whoami
 
-phive --no-progress install 4AA394086372C20A
+phive --no-progress install --trust-gpg-key 4AA394086372C20A
 
 yarn install
 
