@@ -49,6 +49,9 @@ fi
 # no need for dev deps
 $PHP_EXEC /usr/bin/composer install --no-scripts
 
+echo I am running as: 
+whoami
+
 phive --no-progress install --trust-gpg-key
 
 yarn install
