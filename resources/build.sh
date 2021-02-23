@@ -49,11 +49,6 @@ fi
 # no need for dev deps
 $PHP_EXEC /usr/bin/composer install --no-scripts
 
-echo I am running as: 
-whoami
-
-phive --no-progress install #--trust-gpg-keys 4AA394086372C20A E82B2FB314E9906E
-
 yarn install
 
 if [ "$SYSTEM_NAME" == "MobiMarket" ]; then
