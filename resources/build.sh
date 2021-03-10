@@ -16,10 +16,16 @@ if [ -f "$WORKSPACE/build.config" ]; then
   . "$WORKSPACE/build.config"
 fi
 
-# if [ -d "$WORKSPACE/vendor" ]; then
-#   echo "removing $WORKSPACE/vendor"
-#   rm -rf "$WORKSPACE/vendor"
-# fi
+if [ ! -d "$WORKSPACE/storage" ]; then
+  echo "creating $WORKSPACE/storage"
+  mkdir -p "$WORKSPACE/storage/app"
+  mkdir -p "$WORKSPACE/storage/framework"
+  mkdir -p "$WORKSPACE/storage/framework/cache"
+  mkdir -p "$WORKSPACE/storage/framework/sessions"
+  mkdir -p "$WORKSPACE/storage/framework/testing"
+  mkdir -p "$WORKSPACE/storage/framework/views"
+  mkdir -p "$WORKSPACE/storage/logs"
+fi
 
 # if [ -d "$WORKSPACE/node_modules" ]; then
 #   echo "removing $WORKSPACE/node_modules"
