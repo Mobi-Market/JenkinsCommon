@@ -16,6 +16,11 @@ if [ -f "$WORKSPACE/build.config" ]; then
   . "$WORKSPACE/build.config"
 fi
 
+if [ -d "$WORKSPACE/storage" ]; then
+  echo "removing $WORKSPACE/storage"
+  rm -rf "$WORKSPACE/storage"
+fi
+
 if [ ! -d "$WORKSPACE/storage" ]; then
   echo "creating $WORKSPACE/storage"
   mkdir -p "$WORKSPACE/storage/app"
