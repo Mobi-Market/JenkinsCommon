@@ -62,12 +62,17 @@ $PHP_EXEC /usr/bin/composer install --no-scripts
 
 phive install --trust-gpg-keys 4AA394086372C20A,CF1A108D0E7AE720,4AA394086372C20A,6DA3ACC4991FFAE5,E82B2FB314E9906E
 
-yarn install
+JSPM_BIN=npm
+if [ -s "$WORKSPACE/yarn.lock" ]; then
+  JSPM_BIN=yarn
+fi
+
+$JSPM_BIN install
 
 if [ "$SYSTEM_NAME" == "MobiMarket" ]; then
-  yarn run develop
-else 
-  yarn run prod
+  $JSPM_BIN run develop
+else
+  $JSPM_BIN run prod
 fi
 
 $PHP_EXEC artisan key:generate --force
