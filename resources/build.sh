@@ -64,10 +64,10 @@ phive install --trust-gpg-keys 4AA394086372C20A,CF1A108D0E7AE720,4AA394086372C20
 
 if [ -s "$WORKSPACE/yarn.lock" ]; then
   JSPM_BIN=yarn
-  yarn install
+  $JSPM_BIN install
 else
   JSPM_BIN=npm
-  npm ci
+  $JSPM_BIN ci
 fi
 
 if [ "$SYSTEM_NAME" == "MobiMarket" ]; then
