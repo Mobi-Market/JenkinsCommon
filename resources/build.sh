@@ -6,7 +6,7 @@ $PHP_EXEC -v
 echo .
 echo "Running build..."
 echo Name: $SYSTEM_NAME
-if [ -z "$WORKSPACE" ]; then 
+if [ -z "$WORKSPACE" ]; then
   WORKSPACE=$PWD
   echo "WORKSPACE=$WORKSPACE";
 fi
@@ -62,12 +62,13 @@ $PHP_EXEC /usr/bin/composer install --no-scripts
 
 phive install --trust-gpg-keys 4AA394086372C20A,CF1A108D0E7AE720,4AA394086372C20A,6DA3ACC4991FFAE5,E82B2FB314E9906E
 
-JSPM_BIN=npm
 if [ -s "$WORKSPACE/yarn.lock" ]; then
   JSPM_BIN=yarn
+  yarn install
+else
+  JSPM_BIN=npm
+  npm ci
 fi
-
-$JSPM_BIN install
 
 if [ "$SYSTEM_NAME" == "MobiMarket" ]; then
   $JSPM_BIN run develop
