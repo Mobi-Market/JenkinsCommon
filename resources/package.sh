@@ -26,10 +26,4 @@ php artisan cache:clear --env=prod
 php artisan clear-compiled
 # php artisan optimize
 
-if [ "$SYSTEM_NAME" == "MobiMarket" ]; then
-  yarn run develop
-else
-  yarn run prod
-fi
-
 echo "Running Package...Done"
