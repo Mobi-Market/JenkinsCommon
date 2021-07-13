@@ -12,7 +12,7 @@ NB: Change SYSTEM_NAME to the name of the project on Jenkins.
 
 ## Requirements
 
-This common pipeline require you to have the following composer dev dependancies:
+This common pipeline require you to have the following composer dev dependencies:
 
 * [PHPUnit](https://packagist.org/packages/phpunit/phpunit)
 * [PHP-Stan](https://packagist.org/packages/phpstan/phpstan)
@@ -33,7 +33,7 @@ The common Jenkins pipeline provides the following steps:
 5. Copy Paste Detector - Runs PHP CPD on the code base.
 6. Documentation - Runs PHP Doc on the codebase
 7. Package - Builds the code base using production flags ready for archiving and delivery
-8. Archive - Zips the results of the Package step 
+8. Archive - Zips the results of the Package step
 9. Tagging - tags the git repo with release candidate/release tags using the build number.
 
 ## ToDo
@@ -41,4 +41,4 @@ A few outstanding issues need to be resolved. Namely:
 
 * Fix links to the PHP tools report output in Jenkins
 * Fix issues with git tagging the origin with new rc/v tags
-* Fix/add comunication with database for Functional Tests.
+* Fix/add communication with database for Functional Tests.

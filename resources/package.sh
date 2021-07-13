@@ -3,7 +3,7 @@
 set -e
 
 echo "Running Package..."
-if [ -z "$WORKSPACE" ]; then 
+if [ -z "$WORKSPACE" ]; then
   WORKSPACE=$PWD
   echo "WORKSPACE=$WORKSPACE";
 fi
@@ -28,7 +28,7 @@ php artisan clear-compiled
 
 if [ "$SYSTEM_NAME" == "MobiMarket" ]; then
   yarn run develop
-else 
+else
   yarn run prod
 fi
 
