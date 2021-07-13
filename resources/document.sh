@@ -3,7 +3,7 @@
 set -e
 
 echo "Running documentation..."
-if [ -z "$WORKSPACE" ]; then 
+if [ -z "$WORKSPACE" ]; then
   WORKSPACE=$PWD
   echo "WORKSPACE=$WORKSPACE";
 fi

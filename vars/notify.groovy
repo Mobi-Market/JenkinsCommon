@@ -19,7 +19,7 @@ def call(Map config, Closure body) {
 	}
 
 	echo "Notifying GH for system: ${system}"
-	
+
 	// githubNotify account: 'Mobi-Market', context: buildKey, credentialsId: 'b345f1bc-cf1d-4024-bba6-64b66a0f2881', description: 'Starting ' + step + ' Step', gitApiUrl: '', repo: system, status: 'PENDING'
 	githubNotify account: 'Mobi-Market', context: buildKey, credentialsId: '1ff0d140-8690-4233-9ff5-870d3e648cae', description: 'Starting ' + step + ' Step', gitApiUrl: '', repo: system, status: 'PENDING'
 	try {

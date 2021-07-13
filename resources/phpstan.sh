@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Running PHP STAN..."
-if [ -z "$WORKSPACE" ]; then 
+if [ -z "$WORKSPACE" ]; then
   WORKSPACE=$PWD
   echo "WORKSPACE=$WORKSPACE";
 fi
@@ -15,4 +15,3 @@ fi
 composer php-stan-build
 
 echo "Running PHP STAN...Done"
-    

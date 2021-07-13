@@ -2,7 +2,7 @@
 echo pushing tag...
 
 if [ "$BRANCH_NAME" == "master" ]; then
-	GIT_TAG="v.$BUILD_NUMBER" 
+	GIT_TAG="v.$BUILD_NUMBER"
 	GIT_MSG="release $BUILD_NUMBER"
 
 	GIT_REMOTE="$(git ls-remote --get-url)"

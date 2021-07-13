@@ -55,17 +55,26 @@ else
   cp $WORKSPACE/.env.local $WORKSPACE/.env
 fi
 
-#ensure latest composer
+# ensure latest composer
 # composer self-update
 # no need for dev deps
 $PHP_EXEC /usr/bin/composer install --no-scripts
 
 phive install --trust-gpg-keys 4AA394086372C20A,CF1A108D0E7AE720,4AA394086372C20A,6DA3ACC4991FFAE5,E82B2FB314E9906E
 
+# load nvm
+. ~/.nvm/nvm.sh
+
 if [ -s "$WORKSPACE/yarn.lock" ]; then
+  # use node 10 lts
+  nvm use lts/dubnium
+
   JSPM_BIN=yarn
   $JSPM_BIN install
 else
+  # use node 14 lts
+  nvm use lts/fermium
+
   JSPM_BIN=npm
   $JSPM_BIN ci
 fi
